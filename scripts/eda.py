@@ -89,8 +89,19 @@ class analysis:
         plt.show()
         print("Days with Unusually High or Low Returns:")
         return outliers
-   
+    
+    # Calculating var and shape ratio
+    def var_sharpe(df):
+        df['Daily_Return'] = df['Close'].pct_change() * 100
+        confidence_level = 0.95
+        VaR = np.percentile(df['Daily_Return'].dropna(), 100 * (1 - confidence_level))
+        print(f'Value at Risk (VaR) at {confidence_level * 100}% confidence level: {VaR:.2f}%')
+        risk_free_rate = 0  # Assume 0% risk-free rate for simplicity
+        mean_daily_return = df['Daily_Return'].mean()
+        std_daily_return = df['Daily_Return'].std()
+        sharpe_ratio = (mean_daily_return - risk_free_rate) / std_daily_return
 
+        print(f'Sharpe Ratio: {sharpe_ratio:.2f}')
 
     def decompose(df):
         #df.set_index('Date',inplace=True)
