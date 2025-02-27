@@ -9,6 +9,7 @@ class cleaning:
         df=yf.download(tickers,start=start_date,end=end_date)
         df.reset_index(inplace=True)
         df.columns = df.columns.droplevel(1)
+        df.to_csv(f'../Data/{tickers}.csv', index=False)
         return df
    
 
