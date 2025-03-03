@@ -2,9 +2,10 @@ import yfinance as yf
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os,sys
 # TSLA   BND    SPY
 class cleaning:
-    def load_data(tickers,start_date,end_date):
+    def get_data(tickers,start_date,end_date):
         # The close column includes values with adj close 
         df=yf.download(tickers,start=start_date,end=end_date)
         df.reset_index(inplace=True)
@@ -12,7 +13,12 @@ class cleaning:
         df.to_csv(f'../Data/{tickers}.csv', index=False)
         return df
    
-
+    def load_data(symbol):
+       
+        file_path = os.path.join(symbol)
+       
+        return pd.read_csv(file_path, parse_dates=["Date"], index_col="Date")
+        
     def stat(df):
         # Description on dataset
         return df.describe()
