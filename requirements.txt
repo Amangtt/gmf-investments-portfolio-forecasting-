@@ -1,0 +1,10 @@
+pytest
+matplotlib
+seaborn
+numpy==1.26.4
+pandas
+scikit-learn
+pynance
+statsmodels
+pmdarima
+tensorflow
